@@ -22,13 +22,21 @@ for tool in zapier_tools:
         tool.description = f"""useful for when you need to send email to someone. You need to provide the email address (in correct format), subject, and the body of the email. The format should be: "email": "the email's details", "subject": "the subject's details", "body": "the body's details". You provide the details in the body so that the receiver understand the content. The more details, the better!"""
     elif 'create_event_reminder' in tool.zapier_description:
         tool.description = f"""useful for when you need to create an event or set a reminder in Outlook. You need to provide subject, start date & time, end date & time. The format should be: "subject": "the subject's details", "start_datetime": "the start date time", "end_datetime": "the end date time". """
+    elif 'chat' in tool.zapier_description:
+        tool.description = f"""useful for when you need to send message to someone via Microsoft Teams. You need to provide chat, message_text fields. The format should be: "chat": "the person you want to chat", "message_text": "the chat content". Always add "sent_by_discord" at the end of message_text."""
+    elif 'create_playlist' in tool.zapier_description:
+        tool.description = f"""useful for when you need to create a playlist on Spotify. You need to provide playlist_name field. The format should be: "playlist_name": "the name of the playlist"."""
+    elif 'add_track' in tool.zapier_description:
+        tool.description = f"""useful for when you need to add a track to a playlist on Spotify. You need to provide playlist, and track__uri fields. For example: "playlist": "Only You", "track__uri": "spotify:track:2ccW4vFSVKRgVjkZzvdjRw"."""
+    elif 'find_track' in tool.zapier_description:
+        tool.description = f"""useful for when you need to search or find a track on Spotify. You need to provide search query field which include song title and artist. For example: "search_query": "hound dog elvis presley"."""
     else:
         tool.description = f'useful for when you need to do: {tool.zapier_description}'
 
 ddg_tool = Tool(
     name='ddg',
     func=ddg_search.run,
-    description="useful for when you need to search latest song tracks on Spotify, or search for the latest news and events. Input should be a search query.",
+    description="useful for when you need to search for the latest news and events. Input should be a search query.",
 )
 
 pdf_docs_tool = Tool(
