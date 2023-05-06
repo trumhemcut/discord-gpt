@@ -1,0 +1,7 @@
+__pycache__
+
+.conda
+db/pdf_documents
+db/text_documents
+
+.env
