@@ -18,7 +18,10 @@ zapier_tools = toolkit.get_tools()
 ddg_search = DuckDuckGoSearchAPIWrapper()
 
 for tool in zapier_tools:
-    tool.description = f'useful for when you need to do: {tool.zapier_description}'
+    if 'send_email' in tool.zapier_description:
+        tool.description = f"""useful for when you need to send email to someone. You need to provide the email address (in correct format), subject, and the body of the email. The format should be: "email": "the email's details", "subject": "the subject's details", "body": "the body's details". You provide the details in the body so that the receiver understand the content. The more details, the better!"""
+    else:
+        tool.description = f'useful for when you need to do: {tool.zapier_description}'
 
 ddg_tool = Tool(
     name='DuckDuckGo Search',
