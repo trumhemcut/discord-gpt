@@ -20,11 +20,13 @@ ddg_search = DuckDuckGoSearchAPIWrapper()
 for tool in zapier_tools:
     if 'send_email' in tool.zapier_description:
         tool.description = f"""useful for when you need to send email to someone. You need to provide the email address (in correct format), subject, and the body of the email. The format should be: "email": "the email's details", "subject": "the subject's details", "body": "the body's details". You provide the details in the body so that the receiver understand the content. The more details, the better!"""
+    elif 'create_event_reminder' in tool.zapier_description:
+        tool.description = f"""useful for when you need to create an event or set a reminder in Outlook. You need to provide subject, start date & time, end date & time. The format should be: "subject": "the subject's details", "start_datetime": "the start date time", "end_datetime": "the end date time". """
     else:
         tool.description = f'useful for when you need to do: {tool.zapier_description}'
 
 ddg_tool = Tool(
-    name='DuckDuckGo Search',
+    name='ddg',
     func=ddg_search.run,
     description="useful for when you need to search latest song tracks on Spotify, or search for the latest news and events. Input should be a search query.",
 )
@@ -52,7 +54,7 @@ tools = tools + zapier_tools
 memory = ConversationBufferMemory(memory_key="chat_history")
 
 agent = initialize_agent(
-    tools, llm, agent=AgentType.CONVERSATIONAL_REACT_DESCRIPTION, verbose=True, max=3, memory=memory)
+    tools, llm, agent=AgentType.CONVERSATIONAL_REACT_DESCRIPTION, verbose=True, max=10, memory=memory)
 
 
 class Completion:
