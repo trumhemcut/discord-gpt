@@ -1,6 +1,6 @@
 from config import settings
 
-from langchain.llms import OpenAI
+from langchain.llms import OpenAI, AzureOpenAI
 from langchain.agents import load_tools, get_all_tool_names, ConversationalAgent
 from langchain.agents import initialize_agent, Tool
 from langchain.agents import AgentType
@@ -12,6 +12,10 @@ from langchain.utilities.duckduckgo_search import DuckDuckGoSearchAPIWrapper
 from .loader import load_pdf_documents, load_txt_documents
 
 llm = OpenAI(temperature=0, openai_api_key=settings.OPENAI_API_KEY)
+
+# llm = AzureOpenAI(deployment_name=settings.DEPLOYMENT_NAME, model_name=settings.MODEL_NAME,
+#                   model_kwargs={"api_type": settings.API_TYPE, "api_version": settings.API_VERSION})
+
 zapier = ZapierNLAWrapper(zapier_nla_api_key=settings.ZAPIER_NLA_API_KEY)
 toolkit = ZapierToolkit.from_zapier_nla_wrapper(zapier)
 zapier_tools = toolkit.get_tools()
